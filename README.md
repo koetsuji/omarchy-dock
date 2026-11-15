@@ -17,6 +17,12 @@ It is a shell plugin (`koetsuji.dock`): a rebuilt view on top of the data layer 
 
 ![Hover](docs/hover.png)
 
+Right click opens the menu: the app's windows (click to focus), New Window, the app's own actions, Keep in or Remove from Dock, Close. The Trash has its own menu, with Empty Trash behind a confirmation.
+
+![App menu](docs/menu.png)
+
+![Trash menu](docs/menu-trash.png)
+
 The bevel, 4x: omawrite, Chromium, Files, WhatsApp.
 
 ![Bevel](docs/bevel.png)
