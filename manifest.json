@@ -11,8 +11,5 @@
   ],
   "entryPoints": {
     "service": "Dock.qml"
-  },
-  "omarchy": {
-    "clonedFrom": "omarchy.dock"
   }
 }

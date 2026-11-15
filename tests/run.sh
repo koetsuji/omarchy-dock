@@ -199,7 +199,9 @@ step "every measurable tile is the same size on a real screenshot (agent tile in
 
 # ---- drag and drop: the tile's real mouse gesture (Qt, offscreen) and the scenarios of section 10.4
 qt_dragtile() {
-  local out; out=$(cd "$HERE/qt" && QT_QPA_PLATFORM=offscreen timeout 60 /usr/lib/qt6/bin/qmltestrunner -import stubs -input tst_dragtile.qml 2>&1 | grep RESULT | sed 's/.*RESULT //' | sort)
+  # the test needs DockTile.qml next to it; a copy, because a plugin folder may not contain symlinks
+  local work; work=$(mktemp -d); cp -r "$HERE/qt/." "$work/"; cp "$HERE/../DockTile.qml" "$work/"
+  local out; out=$(cd "$work" && QT_QPA_PLATFORM=offscreen timeout 60 /usr/lib/qt6/bin/qmltestrunner -import stubs -input tst_dragtile.qml 2>&1 | grep RESULT | sed 's/.*RESULT //' | sort); rm -rf "$work"
   local want=$'4 px: \ndisabled: \ndrag: start,move,finish\nright click: start,move,cancel\nwobble: click'
   [[ "$out" == "$want" ]] && { echo "4 px: nothing; past 8 px: start, move, finish; right click cancels; a wobble is a click"; return 0; }
   echo "$out" | tr '\n' ';'; return 1

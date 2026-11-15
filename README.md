@@ -2,7 +2,7 @@
 
 A macOS-style dock for [Omarchy](https://omarchy.org/): always visible on every workspace, squircle tiles with a soft gradient and glass bevel, hover magnification, drag to reorder, pin and unpin by dragging.
 
-It is a shell plugin (`koetsuji.dock`), a rebuilt view on top of the data layer of Omarchy's own `omarchy.dock`, and it takes over that plugin's id (`clonedFrom`), so `omarchy-shell omarchy.dock apps` and `omarchy dock ...` keep working.
+It is a shell plugin (`koetsuji.dock`): a rebuilt view on top of the data layer of Omarchy's own `omarchy.dock`. It answers the same IPC target, so `omarchy-shell omarchy.dock apps` and `omarchy dock ...` keep working while the built-in dock is disabled.
 
 ![The dock](docs/dock.png)
 
@@ -23,7 +23,7 @@ The bevel, 4x: omawrite, Chromium, Files, WhatsApp.
 
 ## Requirements
 
-Omarchy with shell plugins (Hyprland, Quickshell), `python3` with Pillow, `rsvg-convert`, and a Nerd Font (JetBrainsMono Nerd Font) for the prompt and robot glyphs. Developed against Omarchy 4.0.0 (Hyprland 0.57, Quickshell 0.3, Qt 6.12).
+Omarchy with shell plugins (Hyprland, Quickshell). External tools the plugin runs (it installs nothing and uses no elevated privileges): `python3` with Pillow and `rsvg-convert` (to build the tiles), `gio` (to empty the trash), `uwsm-app` and `gtk-launch` (to start apps, as Omarchy's own launcher does), and a Nerd Font (JetBrainsMono Nerd Font) for the prompt and robot glyphs in two icons. Developed against Omarchy 4.0.0 (Hyprland 0.57, Quickshell 0.3, Qt 6.12).
 
 ## Install
 
@@ -32,7 +32,16 @@ omarchy plugin add https://github.com/koetsuji/omarchy-dock --enable
 omarchy plugin disable omarchy.dock        # only one dock at a time
 ```
 
-Your pins stay where Omarchy keeps them (`dock.pinned` in `~/.config/omarchy/shell.json`, managed by `omarchy dock`). To go back: `omarchy plugin disable koetsuji.dock && omarchy plugin enable omarchy.dock`.
+Your pins stay where Omarchy keeps them (`dock.pinned` in `~/.config/omarchy/shell.json`, managed by `omarchy dock`).
+
+## Remove
+
+```bash
+omarchy plugin remove koetsuji.dock --yes
+omarchy plugin enable omarchy.dock          # the built-in dock again
+```
+
+Removing the plugin leaves your pins alone. Its own files (settings, the tile cache and the optional logs) live in `~/.local/state/omarchy/koetsuji.dock/`; delete that folder to remove them. The plugin never changes any other configuration file.
 
 The first start builds a tile for every installed app in the background (a few seconds to a minute, once). If you want the app grid on a key, bind `omarchy-shell omarchy.dock apps` (Omarchy's default is Super + Alt + Space).
 
