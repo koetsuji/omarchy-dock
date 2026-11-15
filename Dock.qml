@@ -446,12 +446,21 @@ Item {
   // What the normalizer is asked for, and what the cache is keyed by:
   // "opts|source". Apps follow the icon style and their tileOverrides; the
   // Downloads and Trash items stay bare, like on macOS.
+  function styleFor(item) {
+    if (root.settings.iconStyle !== "squircle") return "bare"
+    if (item && root.settings.slotItems.indexOf(item.key) >= 0) return "slot"
+    return item && root.settings.bareItems.indexOf(item.key) >= 0 ? "bare" : "squircle"
+  }
+
+  function canvasFor(item) { return root.styleFor(item) === "bare" ? 1 : 1.30 }
+
   function iconToken(item) {
     var path = root.sourcePath(root.iconFor(item))
     if (!path) return ""
-    var opts = ["style=" + root.settings.iconStyle]
+    var style = root.styleFor(item)
+    var opts = ["style=" + style]
     var tile = item ? root.settings.tileOverrides[item.key] : null
-    if (root.settings.iconStyle === "squircle") {
+    if (style === "squircle") {
       opts.push("radius=" + root.settings.iconCornerRadius, "accent=" + root.accentHex)
       if (tile) {
         opts.push("mode=" + tile.mode)
@@ -610,11 +619,11 @@ Item {
   readonly property bool trashFull: trashFolder.count > 0
 
   function openDownloads() {
-    Util.execDetached("xdg-open \"$(xdg-user-dir DOWNLOAD)\"")
+    Util.execDetached("xdg-open \"$(. \"${XDG_CONFIG_HOME:-$HOME/.config}/user-dirs.dirs\" 2>/dev/null; echo \"${XDG_DOWNLOAD_DIR:-$HOME/Downloads}\")\"")
   }
 
   function openTrash() {
-    Util.execDetached("gio open trash:///")
+    Util.execDetached("xdg-open \"${XDG_DATA_HOME:-$HOME/.local/share}/Trash/files\"")
   }
 
   function openApps() {

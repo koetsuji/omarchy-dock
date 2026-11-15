@@ -14,6 +14,10 @@ Item {
   property real magnification: 1.4
   // squircle: macOS-style tiles; bare: logos straight on the card.
   property string iconStyle: "squircle"
+  // Item keys that use the bare style even when iconStyle is squircle.
+  property var bareItems: []
+  // Item keys drawn like Downloads and Trash: a bare icon fitted to the tile box, no tile.
+  property var slotItems: []
   property real logoScale: 0.58
   property bool locked: false
   // One line per pointer, menu and launch event to events.log in the runtime folder.
@@ -108,6 +112,8 @@ Item {
     root.iconSize = Math.round(num(data.iconSize, 56, 36, 72))
     root.magnification = num(data.magnification, 1.4, 1.0, 2.0)
     root.iconStyle = pick(data.iconStyle, ["squircle", "bare"], "squircle")
+    root.bareItems = Array.isArray(data.bareItems) ? data.bareItems.map(String) : []
+    root.slotItems = Array.isArray(data.slotItems) ? data.slotItems.map(String) : []
     root.logoScale = num(data.logoScale, 0.58, 0.3, 0.72)
     root.locked = flag(data.locked, false)
     root.debugEvents = flag(data.debugEvents, false)

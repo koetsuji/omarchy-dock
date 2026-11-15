@@ -819,7 +819,7 @@ PanelWindow {
       readonly property string source: window.dock && app.modelData ? window.dock.iconFor(app.modelData) : ""
       anchors.fill: parent
       raw: source
-      canvas: window.dock ? window.dock.canvasScale : 1
+      canvas: window.dock ? window.dock.canvasFor(app.modelData) : 1
       normalized: window.dock && app.modelData ? window.dock.normalizedFor(window.dock.iconToken(app.modelData)) : ""
       showRaw: !!window.dock && !!app.modelData && window.dock.iconFailed[window.dock.iconToken(app.modelData)] === true
       fade: app.launching ? (Style.reduceMotion ? 0.6 : app.pulse) : 1
