@@ -80,8 +80,14 @@ Item {
     var hex = /^#[0-9a-fA-F]{6}$/
     for (var key in source) {
       var item = plain(source[key])
-      if (["plate", "white", "brand", "graphite"].indexOf(item.mode) < 0) { root.warn("tileOverrides." + key + " has no valid mode"); continue }
-      var entry = { mode: item.mode }
+      var hasMode = item.mode !== undefined
+      var logo = Number(item.logo)
+      var hasLogo = item.logo !== undefined && isFinite(logo)
+      if (hasMode && ["plate", "white", "brand", "graphite"].indexOf(item.mode) < 0) { root.warn("tileOverrides." + key + " has no valid mode"); continue }
+      if (!hasMode && !hasLogo) { root.warn("tileOverrides." + key + " needs a mode or a logo size"); continue }
+      var entry = {}
+      if (hasMode) entry.mode = item.mode
+      if (hasLogo) entry.logo = Math.min(1.2, Math.max(0.4, logo))
       if (Array.isArray(item.colors) && item.colors.length === 2 && hex.test(item.colors[0]) && hex.test(item.colors[1])) entry.colors = [item.colors[0], item.colors[1]]
       out[key] = entry
     }

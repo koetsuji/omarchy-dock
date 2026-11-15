@@ -60,7 +60,7 @@ The first start builds a tile for every installed app in the background (a few s
 | `locked` | false | Turns dragging off. |
 | `launchFeedback` | `bounce` | `bounce` or `pulse` while an app starts. |
 | `showDownloads`, `showTrash` | true | The two items at the right end. |
-| `tileOverrides` | `{}` | App id to `{"mode": "plate" \| "white" \| "brand" \| "graphite", "colors": ["#top", "#bottom"]}`. |
+| `tileOverrides` | `{}` | App id to `{"mode": "plate" \| "white" \| "brand" \| "graphite", "colors": ["#top", "#bottom"], "logo": 0.4 to 1.2}`. Every key is optional; `logo` scales the logo inside its tile (0.78 gives more padding). |
 | `iconOverrides` | `{}` | App id (or `downloads`, `trash`) to an icon name or a file path. |
 | `iconScaleOverrides` | `{}` | App id to a size factor, 0.85 to 1.15, for one icon that looks off. |
 | `bareItems` | `[]` | App ids drawn as a bare logo, without a tile, even in the squircle style. |

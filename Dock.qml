@@ -463,7 +463,8 @@ Item {
     if (style === "squircle") {
       opts.push("radius=" + root.settings.iconCornerRadius, "accent=" + root.accentHex)
       if (tile) {
-        opts.push("mode=" + tile.mode)
+        if (tile.mode) opts.push("mode=" + tile.mode)
+        if (tile.logo) opts.push("logo=" + tile.logo)
         if (tile.colors) opts.push("top=" + tile.colors[0], "bottom=" + tile.colors[1])
       }
     }

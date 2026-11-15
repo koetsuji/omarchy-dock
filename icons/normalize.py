@@ -749,6 +749,12 @@ def tile_for(token_src, opts, card_luminance):
         else:
             centre = ((trimmed[0] + trimmed[2]) / 2, (trimmed[1] + trimmed[3]) / 2)
             k_of = lambda size: min(fit[0] * size / tw, fit[1] * size / th)
+        try:  # per-icon padding: "logo=0.8" draws the logo at 80 percent of its usual size
+            logo_mul = min(1.2, max(0.4, float(opts.get("logo", 1))))
+        except ValueError:
+            logo_mul = 1.0
+        k_base = k_of
+        k_of = lambda size: k_base(size) * logo_mul
         if mode == "brand" and symbol is not None:
             logo = Image.new("RGBA", img.size, (255, 255, 255, 0))
             logo.putalpha(symbol)
