@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Agent icon for the dock: the robot glyph of Omarchy's agents panel (the bar icon in
+  $OMARCHY_PATH/shell/plugins/agents/Panel.qml, U+F16A3), white, on a tile filled with
+  the theme accent. The normalizer fills in %ACCENT_TOP% (15 percent lighter) and
+  %ACCENT_BOTTOM% (10 percent darker) from the current theme accent, so the tile follows a
+  theme change with the same gradient as the other tiles. Used for every agent window
+  (org.omarchy.agent). Tweak the glyph size and position below.
+-->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" width="1024" height="1024">
+  <defs>
+    <linearGradient id="accent" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="%ACCENT_TOP%"/>
+      <stop offset="1" stop-color="%ACCENT_BOTTOM%"/>
+    </linearGradient>
+  </defs>
+  <rect width="1024" height="1024" fill="url(#accent)"/>
+  <text x="411" y="742" text-anchor="middle" font-family="JetBrainsMono Nerd Font, Symbols Nerd Font, monospace"
+        font-size="640" fill="#FFFFFF">󱚣</text>
+</svg>

@@ -1,0 +1,18 @@
+{
+  "schemaVersion": 1,
+  "id": "koetsuji.dock",
+  "name": "macOS-style Dock",
+  "version": "1.0.0",
+  "author": "koetsuji",
+  "license": "MIT",
+  "description": "An always-visible dock for Omarchy in the macOS style: squircle tiles, hover magnification, drag to reorder, pin and unpin.",
+  "kinds": [
+    "service"
+  ],
+  "entryPoints": {
+    "service": "Dock.qml"
+  },
+  "omarchy": {
+    "clonedFrom": "omarchy.dock"
+  }
+}

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Terminal icon for the dock (iconOverrides: "foot"). A graphite tile with the same
+  gradient as the other graphite tiles (#4A4A4F to #1C1C1E) and a ">_" prompt in the
+  top left: ">" white, the "_" cursor in the theme accent. The normalizer fills in
+  %ACCENT% from the current theme, so the cursor follows a theme change. Tweak the
+  font, size and position of the text below; the file is read as it is on disk.
+-->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" width="1024" height="1024">
+  <defs>
+    <linearGradient id="graphite" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#4A4A4F"/>
+      <stop offset="1" stop-color="#1C1C1E"/>
+    </linearGradient>
+  </defs>
+  <rect width="1024" height="1024" fill="url(#graphite)"/>
+  <text x="140" y="500" font-family="JetBrainsMono Nerd Font, JetBrains Mono, monospace"
+        font-weight="800" font-size="460" letter-spacing="-10" fill="#FFFFFF">&gt;<tspan fill="%ACCENT%">_</tspan></text>
+</svg>
